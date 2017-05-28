@@ -1,0 +1,63 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+	<head>
+		<title>
+			{% block title %}My Hello Web App Project{% endblock title %}
+		</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		{% block header %}{% endblock header %}
+	</head>
+
+	<body>
+		<div class="header">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="{% url 'home' %}">Home</a>
+					</li>
+					<li>
+						<a href="{% url 'about' %}">About</a>
+					</li>
+					<li>
+						<a href="{% url 'contact' %}">Contact</a>
+					</li>
+					<li>
+						<a href="{% url 'browse' %}">Browse</a>
+					</li>
+
+					{% if user.is_authenticated %}
+					<li>
+					    <a href="{% url 'auth_logout' %}">Logout</a>
+					</li>
+					{% else %}
+					<li>
+					    <a href="{% url 'auth_login' %}">Login</a>
+					</li>
+					<li>
+					    <a href="{% url 'registration_register' %}">Register</a>
+					</li>
+					{% endif %}
+					
+				</ul>
+			</nav>
+		</div>
+
+		<div class="marginTop">
+			<div id="hello">
+				<h1>Hello Web App</h1>
+			</div>
+		</div>
+
+		<div class="container ">
+			<div class="row second">
+				{% block content %}{% endblock content%}
+
+				{% block footer %}{% endblock footer %}
+			</div>
+		</div>
+	</body>
+</html>
